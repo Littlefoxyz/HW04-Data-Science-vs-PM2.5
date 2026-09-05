@@ -1,0 +1,4 @@
+variable,t_statistic,p_value,significant_p005
+wind_speed_10m,-3.0243,0.002567124219722458,True
+relative_humidity_2m,9.1962,2.802929938355764e-19,True
+temperature_2m,-1.0276,0.30441886612514885,False

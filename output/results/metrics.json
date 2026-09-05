@@ -1,0 +1,67 @@
+{
+  "baseline_persistence": {
+    "mae": 5.679,
+    "rmse": 7.752,
+    "r2": 0.53
+  },
+  "linear_regression": {
+    "cv_mae_mean": 4.859,
+    "cv_mae_std": 3.145,
+    "test_mae": 5.135,
+    "test_rmse": 7.307,
+    "test_r2": 0.582,
+    "beats_baseline": true
+  },
+  "random_forest": {
+    "cv_mae_mean": 4.824,
+    "cv_mae_std": 2.336,
+    "test_mae": 5.909,
+    "test_rmse": 8.238,
+    "test_r2": 0.469,
+    "beats_baseline": false
+  },
+  "classification": {
+    "baseline_majority_class": {
+      "accuracy": 0.812,
+      "precision_exceeds": 0.0,
+      "recall_exceeds": 0.0,
+      "f1_exceeds": 0.0
+    },
+    "logistic_regression": {
+      "cv_recall_mean": 0.36,
+      "accuracy": 0.682,
+      "precision_exceeds": 0.362,
+      "recall_exceeds": 0.906,
+      "f1_exceeds": 0.518,
+      "confusion_matrix": [
+        [
+          87,
+          51
+        ],
+        [
+          3,
+          29
+        ]
+      ],
+      "beats_baseline_recall": true
+    },
+    "random_forest_clf": {
+      "cv_recall_mean": 0.253,
+      "accuracy": 0.818,
+      "precision_exceeds": 0.51,
+      "recall_exceeds": 0.781,
+      "f1_exceeds": 0.617,
+      "confusion_matrix": [
+        [
+          114,
+          24
+        ],
+        [
+          7,
+          25
+        ]
+      ],
+      "beats_baseline_recall": true
+    }
+  }
+}
