@@ -7,8 +7,6 @@ Thailand's 24-hour ambient standard for PM2.5 is 37.5 micrograms per cubic metre
 ## Report
 `report/Report_HOMEWORK 4.pdf`
 
-## Presentation clip
-[ใส่ลิงก์ YouTube ตรงนี้]
 
 ## How to run (in order)
 
