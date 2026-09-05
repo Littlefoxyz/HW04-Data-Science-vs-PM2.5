@@ -85,51 +85,42 @@ print(df_wx.info())
 import requests
 import urllib3
 import pandas as pd
-from pathlib import Path
 
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
+# 1) ดึง Air4Thai ก่อน
 resp = requests.get(
     "http://air4thai.pcd.go.th/services/getNewAQI_JSON.php",
-    timeout=30,
-    verify=False
+    timeout=30, verify=False
 )
 data = resp.json()
+
 cm_stations = [
     s for s in data["stations"]
     if "เชียงใหม่" in s.get("areaTH", "") or "เชียงใหม่" in s.get("nameTH", "")
 ]
 
-print(f"เจอสถานีในเชียงใหม่ {len(cm_stations)} สถานี:\n")
+# 2) อ่านวัน-เวลาจาก Air4Thai โดยตรง (ไม่ hardcode)
+sample_time = cm_stations[0]["AQILast"]["time"]   # เช่น "21:00"
+sample_date = cm_stations[0]["AQILast"]["date"]   # เช่น "2026-09-05"
+
+print(f"Air4Thai รายงานที่: {sample_date} {sample_time}")
 for s in cm_stations:
-    aqi = s.get("AQILast", {})
-    pm25 = aqi.get("PM25", {}).get("value", "N/A")
-    print(f"- {s['nameTH']} ({s['areaTH']})")
-    print(f"  วันที่: {aqi.get('date')} เวลา: {aqi.get('time')}  PM2.5 = {pm25} µg/m³\n")
+    aqi = s["AQILast"]
+    print(f"- {s['nameTH']}: PM2.5 = {aqi['PM25']['value']} ({aqi['date']} {aqi['time']})")
 
-BASE_DIR = Path(__file__).resolve().parent.parent
-df = pd.read_csv(BASE_DIR / "data" / "processed" / "pm25_processed.csv")
-df["date"] = pd.to_datetime(df["date"], utc=True).dt.tz_convert("Asia/Bangkok")
-
-now = pd.Timestamp.now(tz="Asia/Bangkok").floor("h")
-closest = df.iloc[(df["date"] - now).abs().argsort()[:1]]
-print("Open-Meteo (ชั่วโมงใกล้เคียงเวลาปัจจุบันสุด):")
-print(closest[["date", "pm2_5"]])
-
+# 3) ดึง Open-Meteo ของวันเดียวกัน แล้วกรองด้วยเวลาที่ได้จริงจาก Air4Thai
 resp_today = requests.get(
     "https://air-quality-api.open-meteo.com/v1/air-quality",
     params={
-        "latitude": 18.7904,
-        "longitude": 98.9847,
-        "start_date": "2026-09-05",
-        "end_date": "2026-09-05",
-        "hourly": "pm2_5",
-        "timezone": "Asia/Bangkok",
+        "latitude": 18.7904, "longitude": 98.9847,
+        "start_date": sample_date, "end_date": sample_date,
+        "hourly": "pm2_5", "timezone": "Asia/Bangkok",
     },
 )
 today_data = resp_today.json()
 df_today = pd.DataFrame(today_data["hourly"])
 
-match = df_today[df_today["time"].str.contains("16:00")]
-print("Open-Meteo วันนี้ 16:00:")
+match = df_today[df_today["time"].str.contains(sample_time)]
+print(f"\nOpen-Meteo ที่ {sample_time}:")
 print(match)

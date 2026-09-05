@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 pandas
 numpy
 scipy
@@ -10,3 +11,17 @@ retry-requests
 requests
 urllib3
 
+=======
+pandas
+numpy
+scipy
+matplotlib
+seaborn
+scikit-learn
+openmeteo-requests
+requests-cache
+retry-requests
+requests
+urllib3
+
+>>>>>>> 13fbf78 (Push complete project structure including report)
