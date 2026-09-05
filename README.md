@@ -4,6 +4,12 @@ Every year between roughly January and April, the air in Northern Thailand becom
 
 Thailand's 24-hour ambient standard for PM2.5 is 37.5 micrograms per cubic metre. That single number decides whether a warning is issued, whether outdoor activities are cancelled, and whether a day is counted as a violation in the official statistics.
 
+## Report
+`report/Report_HOMEWORK 4.pdf`
+
+## Presentation clip
+[ใส่ลิงก์ YouTube ตรงนี้]
+
 ## How to run (in order)
 
 ```bash
