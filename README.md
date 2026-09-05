@@ -5,7 +5,7 @@ Every year between roughly January and April, the air in Northern Thailand becom
 Thailand's 24-hour ambient standard for PM2.5 is 37.5 micrograms per cubic metre. That single number decides whether a warning is issued, whether outdoor activities are cancelled, and whether a day is counted as a violation in the official statistics.
 
 ## Report
-`report/Report_HOMEWORK 4.pdf`
+[Report_HOMEWORK 4.pdf](report/Report_HOMEWORK%204.pdf)
 
 
 ## How to run (in order)
@@ -28,10 +28,3 @@ python scr/model.py
 ## Study location
 
 Chiang Mai, Thailand (18.7883, 98.9853)
-
-## Models
-
-- **Regression**: predicts tomorrow's mean PM2.5 (Linear Regression, Random Forest)
-- **Classification**: predicts whether tomorrow exceeds the Thai 24-hr standard of 37.5 µg/m³ (Logistic Regression, Random Forest Classifier)
-
-Both use time-based train/test split (not random) and TimeSeriesSplit cross-validation, since the data is temporally ordered.
